@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='Unanet_Web_Test',
+    name='Unanet_Web_Automation',
 	version='1.1',
 	description='Unanet Module',
 	author='Jack Harmon',

@@ -1,12 +1,9 @@
 README
 setup.py
-Unanet_Web_Automation.egg-info/PKG-INFO
-Unanet_Web_Automation.egg-info/SOURCES.txt
-Unanet_Web_Automation.egg-info/dependency_links.txt
-Unanet_Web_Automation.egg-info/top_level.txt
 Unanet_Web_Automation/__init__.py
-Unanet_Web_Automation/Unanet_Web_Automation.py
+Unanet_Web_Automation/stanfun.py
 Unanet_Web_Automation.egg-info/PKG-INFO
 Unanet_Web_Automation.egg-info/SOURCES.txt
 Unanet_Web_Automation.egg-info/dependency_links.txt
+Unanet_Web_Automation.egg-info/requires.txt
 Unanet_Web_Automation.egg-info/top_level.txt

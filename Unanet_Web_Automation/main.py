@@ -9,14 +9,14 @@ def hello(name):
 	print("My name is " + name)
 
 
-def init_brwsr(headless=True, downloadDir, driver_path=''):
+def init_brwsr(downloadDir, headless=True, driver_path=''):
     chromeOptions = webdriver.ChromeOptions()
     prefs = {"download.default_directory": downloadDir}
     chromeOptions.add_experimental_option("prefs", prefs)
     if headless:
        chromeOptions.add_argument("--headless")
     chromeDriver = chromeDir
-    if driver not '':
+    if not driver_path:
         driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
     else:
         driver = webdriver.Chrome(chrome_options=chromeOptions)

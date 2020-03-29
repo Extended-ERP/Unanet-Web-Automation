@@ -43,36 +43,41 @@ def login(driver, URL, username, password):
 
 print("loaded")
 
-def mkRefFile(tbody, ref_file, clmPadding):
+def mkRefFile(table, ref_file, clmPadding, x, y, z):
 
     """ Creates csv from Unanet table
         Fields:
             tbody - html table
             ref_file - save file name
             clmPadding - column padding in case headers don't line up to values
+            x - Skip # of header records (int)
+            y - Skip # of rows in table body (int)
+            z - Skip # of attributes in table body rows (int)
     """
 
-    head = tbody.find_element_by_tag_name('thead')
-    body = tbody.find_element_by_tag_name('tbody')
+    head = table.find_element_by_tag_name('thead')
+    body = table.find_element_by_tag_name('tbody')
 
     file_data = []
 
     head_line = head.find_element_by_tag_name("tr")
-    file_header = [header.text for header in head_line.find_elements_by_tag_name('td')]
+    file_header = [header.text.replace('\n', ' ') for header in head_line.find_elements_by_tag_name('td')[x:]]
+
+    print(str(file_header))
+
     for x in range(clmPadding):
         file_header.insert(0, '')
     file_header.insert(0,'key')
     file_data.append(",".join(file_header))
 
     body_rows = body.find_elements_by_tag_name('tr')
-    for row in body_rows:
-        data = row.find_elements_by_tag_name('td')
+    for row in body_rows[y:]:
+        tds = row.find_elements_by_tag_name('td')
         key = row.get_attribute("id").strip("k_").strip("r")
         file_row = []
-        for datum in data:
-            datum_text = datum.text
-            file_row.append(datum_text)
-            print(datum_text)
+        for td in tds[z:]:
+            td_text = td.text
+            file_row.append(td_text)
         file_row.insert(0, key)
         file_data.append(",".join(file_row))
 

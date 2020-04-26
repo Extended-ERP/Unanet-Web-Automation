@@ -10,26 +10,32 @@ def hello(name):
 
 
 def init_brwsr(downloadDir, headless=True, driver_path="", browser=""):
-    if browser = "Chrome"
+    if browser == "Chrome":
         from selenium.webdriver.chrome.options import Options
         chromeOptions = webdriver.ChromeOptions()
         prefs = {"download.default_directory": downloadDir}
         chromeOptions.add_experimental_option("prefs", prefs)
-        chromeOptions.add_argument("--headless") if headless
+        if headless:
+            chromeOptions.add_argument("--headless")
         if not driver_path:
             driver = webdriver.Chrome(chrome_options=chromeOptions)
         else:
             driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
         print("browser opened")
-    elif browser = "Firefox"
+    elif browser == "Firefox":
         from selenium.webdriver.firefox.options import Options
         options = Options()
         profile = webdriver.FirefoxProfile()
-        options.headless = True if headless
+        profile.set_preference("browser.download.folderList", 2)
+        profile.set_preference("browser.download.manager.showWhenStarting", False)
+        profile.set_preference("browser.download.dir", downloadDir)
+        profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/x-gzip, text/csv, csv, application/download")
+        if headless:
+            options.headless = True
         if not driver_path:
-            settings.driver = webdriver.Firefox(options=options, firefox_profile=profile)
+            driver = webdriver.Firefox(options=options, firefox_profile=profile)
         else:
-            settings.driver = webdriver.Firefox(options=options, executable_path=r'/usr/bin/geckodriver', firefox_profile=profile)
+            driver = webdriver.Firefox(options=options, executable_path=driver_path, firefox_profile=profile)
         print("browser opened")
     return driver
 

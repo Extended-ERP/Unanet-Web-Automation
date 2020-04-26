@@ -2,24 +2,35 @@ import csv
 import os
 import time
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+
 
 # starts google chrome in either headless (export) or standard (import) mode.
 def hello(name):
 	print("My name is " + name)
 
 
-def init_brwsr(downloadDir, headless=True, driver_path=""):
-    chromeOptions = webdriver.ChromeOptions()
-    prefs = {"download.default_directory": downloadDir}
-    chromeOptions.add_experimental_option("prefs", prefs)
-    if headless:
-       chromeOptions.add_argument("--headless")
-    if not driver_path:
-        driver = webdriver.Chrome(chrome_options=chromeOptions)
-    else:
-        driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
-    print("browser opened")
+def init_brwsr(downloadDir, headless=True, driver_path="", browser=""):
+    if browser = "Chrome"
+        from selenium.webdriver.chrome.options import Options
+        chromeOptions = webdriver.ChromeOptions()
+        prefs = {"download.default_directory": downloadDir}
+        chromeOptions.add_experimental_option("prefs", prefs)
+        chromeOptions.add_argument("--headless") if headless
+        if not driver_path:
+            driver = webdriver.Chrome(chrome_options=chromeOptions)
+        else:
+            driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
+        print("browser opened")
+    elif browser = "Firefox"
+        from selenium.webdriver.firefox.options import Options
+        options = Options()
+        profile = webdriver.FirefoxProfile()
+        options.headless = True if headless
+        if not driver_path:
+            settings.driver = webdriver.Firefox(options=options, firefox_profile=profile)
+        else:
+            settings.driver = webdriver.Firefox(options=options, executable_path=r'/usr/bin/geckodriver', firefox_profile=profile)
+        print("browser opened")
     return driver
 
 
